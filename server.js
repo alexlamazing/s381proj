@@ -87,7 +87,7 @@ app.get('/restaurant_id/:id', function(req,res) {
     });
 });
 
-app.get('/restaurant_id/', function(req,res) {
+app.get('/restaurant/', function(req,res) {
 	var restaurantSchema = require('./models/restaurant');
 	mongoose.connect(mongodbURL);
 	var db = mongoose.connection;
