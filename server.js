@@ -99,6 +99,9 @@ app.get('/restaurant/', function(req,res) {
 				res.status(500).json(err);
 				throw err
 			}
+			if (results.length > 0) {
+				res.status(200).json(results);
+			}
 			db.close();
     	});
     });
