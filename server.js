@@ -87,7 +87,7 @@ app.get('/restaurant_id/:id', function(req,res) {
     });
 });
 
-app.put('/restaurant_id/:restaurant_id/grade', function(req,res) {
+app.put('/restaurant_id/:id/grade', function(req,res) {
 	var restaurantSchema = require('./models/restaurant');
 	mongoose.connect(mongodbURL);
 	var db = mongoose.connection;
@@ -97,7 +97,7 @@ app.put('/restaurant_id/:restaurant_id/grade', function(req,res) {
 		var Restaurant = mongoose.model('Restaurant', restaurantSchema);
 		var settings = req.body;
 		criteria = {"grades":settings};
-		Restaurant.update({restaurant_id:req.params.restaurant_id},{$set:criteria},function(err){
+		Restaurant.update({restaurant_id:req.params.id},{$set:criteria},function(err){
 			if (err) {
 				console.log("Error: " + err.message);
 				res.write(err.message);
