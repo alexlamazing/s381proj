@@ -143,7 +143,7 @@ app.put('/:fieldName/:fieldValue', function(req,res) {
 	db.once('open', function (callback) {
 		var Restaurant = mongoose.model('Restaurant', restaurantSchema);
 		var settings = req.body;
-		criteria = {settings};
+		criteria = settings;
 		fieldName = req.params.fieldName;
 		fieldValue = req.params.fieldValue;
 		Restaurant.update({fieldName:fieldValue},{$set:criteria},function(err){
