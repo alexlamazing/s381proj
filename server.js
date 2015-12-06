@@ -121,7 +121,7 @@ app.get('/:field/:value', function(req,res) {
 		var fieldName = req.params.field;
 		var fieldValue = req.params.value;
 		criteria = {fieldName:fieldValue};
-		Restaurant.find(criteria,function(err,results){
+		Restaurant.find({fieldName:fieldValue},function(err,results){
        		if (err) {
 				res.status(500).json(err);
 				throw err
