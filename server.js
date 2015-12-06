@@ -110,6 +110,32 @@ app.get('/restaurant/', function(req,res) {
     });
 });
 
+app.get('/:field/:value', function(req,res) {
+	var restaurantSchema = require('./models/restaurant');
+	mongoose.connect(mongodbURL);
+	var db = mongoose.connection;
+
+	db.on('error', console.error.bind(console, 'connection error:'));
+	db.once('open', function (callback) {
+		var Restaurant = mongoose.model('Restaurant', restaurantSchema);
+		var fieldName = req.params.field;
+		var fieldValue = req.params.value;
+		Restaurant.find({fieldName:fieldValue},function(err,results){
+       		if (err) {
+				res.status(500).json(err);
+				throw err
+			}
+			if (results.length > 0) {
+				res.status(200).json(results);
+			}
+			else {
+				res.status(200).json({message: 'No document'});
+			}
+			db.close();
+		});
+	});
+});
+
 app.put('/restaurant_id/:id/grade', function(req,res) {
 	var restaurantSchema = require('./models/restaurant');
 	mongoose.connect(mongodbURL);
@@ -129,29 +155,6 @@ app.put('/restaurant_id/:id/grade', function(req,res) {
 				db.close();
 				//res.end('Done',200);
 				res.status(200).json({message: 'Update done'});
-			}
-		});
-	});
-});
-
-app.get('/:field/:value', function(req,res) {
-	var restaurantSchema = require('./models/restaurant');
-	mongoose.connect(mongodbURL);
-	var db = mongoose.connection;
-
-	db.on('error', console.error.bind(console, 'connection error:'));
-	db.once('open', function (callback) {
-		var Restaurant = mongoose.model('Restaurant', restaurantSchema);
-		var fieldName = req.params.field;
-		var fieldValue = req.params.value;
-		Restaurant.find({fieldName:fieldValue},function(err, results){
-			if (err) {
-				console.log("Error: " + err.message);
-				res.write(err.message);
-			}
-			else {
-				db.close();
-				res.status(200).json(results);
 			}
 		});
 	});
