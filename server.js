@@ -134,7 +134,7 @@ app.put('/restaurant_id/:id/grade', function(req,res) {
 	});
 });
 
-app.put('/:fieldName/:fieldValue', function(req,res) {
+app.put('/:field/:value', function(req,res) {
 	var restaurantSchema = require('./models/restaurant');
 	mongoose.connect(mongodbURL);
 	var db = mongoose.connection;
@@ -143,9 +143,9 @@ app.put('/:fieldName/:fieldValue', function(req,res) {
 	db.once('open', function (callback) {
 		var Restaurant = mongoose.model('Restaurant', restaurantSchema);
 		var settings = req.body;
-		var criteria = {"name":"yyy"};
-		var fieldName = req.params.fieldName;
-		var fieldValue = req.params.fieldValue;
+		var criteria = JSON.parse(settings);
+		var fieldName = req.params.field;
+		var fieldValue = req.params.value;
 		Restaurant.update({fieldName:fieldValue},{$set:criteria},function(err){
 			if (err) {
 				console.log("Error: " + err.message);
