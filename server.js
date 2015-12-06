@@ -102,7 +102,6 @@ app.get('/restaurant/', function(req,res) {
 			if (results.length > 0) {
 				res.status(200).json(results);
 			}
-						}
 			else {
 				res.status(200).json({message: 'No document'});
 			}
@@ -111,7 +110,7 @@ app.get('/restaurant/', function(req,res) {
     });
 });
 
-app.put('/restaurant_id/:restaurant_id/grade', function(req,res) {
+app.put('/restaurant_id/:id/grade', function(req,res) {
 	var restaurantSchema = require('./models/restaurant');
 	mongoose.connect(mongodbURL);
 	var db = mongoose.connection;
@@ -121,7 +120,7 @@ app.put('/restaurant_id/:restaurant_id/grade', function(req,res) {
 		var Restaurant = mongoose.model('Restaurant', restaurantSchema);
 		var settings = req.body;
 		criteria = {"grades":settings};
-		Restaurant.update({restaurant_id:req.params.restaurant_id},{$set:criteria},function(err){
+		Restaurant.update({restaurant_id:req.params.id},{$set:criteria},function(err){
 			if (err) {
 				console.log("Error: " + err.message);
 				res.write(err.message);
