@@ -119,7 +119,7 @@ app.get('/:field/:value', function(req,res) {
 	db.once('open', function (callback) {
 		var Restaurant = mongoose.model('Restaurant', restaurantSchema);
 		//criteria = {"req.params.field": req.params.value};
-		criteria = {"cuisine": "xxx"};
+		criteria = {req.params.field: "xxx"};
 		Restaurant.find(criteria,function(err,results){
        		if (err) {
 				res.status(500).json(err);
