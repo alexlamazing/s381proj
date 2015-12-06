@@ -142,7 +142,8 @@ app.put('/:field/:value', function(req,res) {
 	db.on('error', console.error.bind(console, 'connection error:'));
 	db.once('open', function (callback) {
 		var Restaurant = mongoose.model('Restaurant', restaurantSchema);
-		var name = req.body.name;
+		//var name = req.body.name;
+		var name = "yyy";
 		var criteria = {"name":name};
 		var fieldName = req.params.field;
 		var fieldValue = req.params.value;
