@@ -134,4 +134,29 @@ app.put('/restaurant_id/:id/grade', function(req,res) {
 	});
 });
 
+app.put('/:fieldName/:fieldValue', function(req,res) {
+	var restaurantSchema = require('./models/restaurant');
+	mongoose.connect(mongodbURL);
+	var db = mongoose.connection;
+
+	db.on('error', console.error.bind(console, 'connection error:'));
+	db.once('open', function (callback) {
+		var Restaurant = mongoose.model('Restaurant', restaurantSchema);
+		var settings = req.body;
+		criteria = {settings};
+		fieldName = req.params.fieldName;
+		fieldValue = req.params.fieldValue;
+		Restaurant.update({fieldName:fieldValue},{$set:criteria},function(err){
+			if (err) {
+				console.log("Error: " + err.message);
+				res.write(err.message);
+			}
+			else {
+				db.close();
+				res.status(200).json({message: 'Update done'});
+			}
+		});
+	});
+});
+
 app.listen(process.env.PORT || 8099);
