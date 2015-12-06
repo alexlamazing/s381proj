@@ -102,6 +102,10 @@ app.get('/restaurant/', function(req,res) {
 			if (results.length > 0) {
 				res.status(200).json(results);
 			}
+						}
+			else {
+				res.status(200).json({message: 'No document'});
+			}
 			db.close();
     	});
     });
