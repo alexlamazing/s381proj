@@ -110,6 +110,7 @@ app.get('/restaurant/', function(req,res) {
     });
 });
 
+/*
 app.get('/:field/:value', function(req,res) {
 	var restaurantSchema = require('./models/restaurant');
 	mongoose.connect(mongodbURL);
@@ -136,6 +137,7 @@ app.get('/:field/:value', function(req,res) {
 		});
 	});
 });
+*/
 
 app.put('/restaurant_id/:id/grade', function(req,res) {
 	var restaurantSchema = require('./models/restaurant');
