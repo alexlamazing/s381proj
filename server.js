@@ -71,7 +71,9 @@ app.get('/restaurant_id/:id?', function(req,res) {
 	db.on('error', console.error.bind(console, 'connection error:'));
 	db.once('open', function (callback) {
 		var Restaurant = mongoose.model('Restaurant', restaurantSchema);
-		Restaurant.find({restaurant_id: req.params.id},function(err,results){
+		var obj = {};
+		obj[restaurant_id] = req.params.id;
+		Restaurant.find(obj,function(err,results){
        		if (err) {
 				res.status(500).json(err);
 				throw err
