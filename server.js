@@ -78,7 +78,7 @@ app.get('/restaurant_id/:id?', function(req,res) {
 				res.status(500).json(err);
 				throw err
 			}
-			alert("+"+results+"+");
+			res.write("+"+results+"+");
 			if (results.length > 0) {
 				res.status(200).json(results);
 			}
