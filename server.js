@@ -82,7 +82,7 @@ app.get('/restaurant_id/:id?', function(req,res) {
 				res.status(200).json(results);
 			}
 			else {
-				res.status(200).json({message: 'No matching document', restaurant_id: req.params.id});
+				res.status(200).json({message: 'No matching document'});
 			}
 			db.close();
     	});
