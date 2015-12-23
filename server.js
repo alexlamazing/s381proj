@@ -72,7 +72,7 @@ app.get('/restaurant_id/:id?', function(req,res) {
 	db.once('open', function (callback) {
 		var Restaurant = mongoose.model('Restaurant', restaurantSchema);
 		var obj = {};
-		obj[restaurant_id] = req.params.id;
+		obj["restaurant_id"] = req.params.id;
 		Restaurant.find(obj,function(err,results){
        		if (err) {
 				res.status(500).json(err);
